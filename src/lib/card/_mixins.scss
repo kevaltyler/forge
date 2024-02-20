@@ -1,10 +1,4 @@
-@use '@material/elevation/elevation-theme' as mdc-elevation-theme;
-@use '@material/card/mixins' as mdc-card-mixins;
-@use '@material/card/variables' as mdc-card-variables;
-@use '../utils/variables-grid';
 @use '../theme';
-@use '../utils/functions-grid';
-@use '../utils/mixins-flex';
 @use './variables';
 
 @mixin core-styles() {
@@ -22,19 +16,21 @@
 }
 
 @mixin base() {
-  @include mdc-card-mixins.fill-color(surface);
-  @include mdc-card-mixins.shape-radius(medium);
-  @include mdc-elevation-theme.elevation(1);
   @include theme.css-custom-property(height, --forge-card-height, 100%);
   @include theme.css-custom-property(width, --forge-card-width, 100%);
   @include theme.css-custom-property(padding, --forge-card-padding, variables.$padding);
+  box-sizing: border-box;
+
+  @include theme.css-custom-property(color, --forge-card-theme-on-background, on-background);
+  @include theme.css-custom-property(background-color, --forge-card-theme-background-color, on-primary);
   @include theme.css-custom-property(overflow, --forge-card-overflow, hidden);
 
-  box-sizing: border-box;
+  @include theme.css-custom-property(border-radius, --forge-card-border-radius, variables.$border-radius);
+  @include theme.css-custom-property(box-shadow, --forge-card-box-shadow, variables.$box-shadow);
 }
 
 @mixin outlined() {
-  @include mdc-elevation-theme.elevation(0);
-  @include mdc-card-mixins.outline(mdc-card-variables.$outline-color);
-  @include theme.property(border-color, border-color);
+  @include theme.css-custom-property(box-shadow, --forge-card-box-shadow, variables.$box-shadow-outlined);
+  @include theme.property(border, border);
+  // @include theme.property(border-color, border-color);
 }
